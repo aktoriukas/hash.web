@@ -20,6 +20,7 @@ const IndexPage = () => {
     "secret-1": "This is a secret",
     "secret-2": "This is another secret",
     "secret-3": "This is the last secret",
+    "secret-4": "This is the last secret",
   })
 
   console.log(secrets)
