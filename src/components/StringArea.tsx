@@ -1,12 +1,10 @@
 import React, { useState } from "react"
 
-export default function StringArea({ handleStringSubmit }) {
-  const [string, setString] = useState("")
-
+export default function StringArea({ handleStringSubmit, string, setString }) {
   return (
     <div className="container">
       <h2>Enter your string:</h2>
-      <textarea onChange={(e) => setString(e.target.value)}></textarea>
+      <textarea value={string ? string : ""} onChange={(e) => setString(e.target.value)}></textarea>
       <button onClick={() => handleStringSubmit(string)}>Submit</button>
     </div>
   )

@@ -15,7 +15,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "crypto": "^1.0.1",
+    "crypto-js": "^4.1.1",
     "framer-motion": "^6.2.1",
     "gatsby": "^4.5.4",
     "react": "^17.0.1",

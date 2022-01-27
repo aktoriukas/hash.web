@@ -1,40 +1,44 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import PasswordRequest from "../components/PasswordRequest"
 import StringArea from "../components/StringArea"
 import { motion } from "framer-motion"
 import SecretContainer from "../components/SecretContainer"
+import { h_v } from "../func/variants"
+import { secret_type } from "../types"
+import { encryptData } from "../func/tools"
 
 const IndexPage = () => {
-  const [password, setPassword] = useState(null)
-  const [string, setString] = useState(null)
+  const [password, setPassword] = useState(null as string | null)
+  const [string, setString] = useState(null as string | null)
+  const [secrets, setSecrets] = useState({
+    one: "This is a secret",
+    two: "This is another secret",
+    "3": "This is the last secret",
+    "4": "This is the last secret",
+  } as secret_type)
 
   const handleStringSubmit = (string: string) => {
     setString(string)
   }
-  const variants = {
-    hidden: { opacity: 0, display: "none" },
-    visible: { opacity: 1, display: "block" },
-  }
 
-  const [secrets, setSecrets] = useState({
-    "secret-1": "This is a secret",
-    "secret-2": "This is another secret",
-    "secret-3": "This is the last secret",
-    "secret-4": "This is the last secret",
-  })
-
-  console.log(secrets)
+  useEffect(() => {
+    if (password) {
+      // convert secrets to string
+      const string = encryptData(password, secrets)
+      setString(string)
+    }
+  }, [secrets])
 
   return (
     <main>
       <title>Home Page</title>
       <h1>Hello World</h1>
 
-      <motion.div variants={variants} animate={password ? "visible" : "hidden"}>
-        <StringArea handleStringSubmit={handleStringSubmit} />
+      <motion.div variants={h_v} animate={password ? "visible" : "hidden"}>
+        <StringArea setString={setString} string={string} handleStringSubmit={handleStringSubmit} />
       </motion.div>
 
-      <motion.div variants={variants} animate={password ? "hidden" : "visible"}>
+      <motion.div variants={h_v} animate={password ? "hidden" : "visible"}>
         <PasswordRequest setPass={setPassword} text={"Your Password:"} />
       </motion.div>
 
