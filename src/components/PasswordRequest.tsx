@@ -1,13 +1,19 @@
 import React, { useState } from "react"
+import Input from "./Input"
+import Btn from "./Btn"
 
 export default function PasswordRequest({ text, setPass }) {
   const [password, setPassword] = useState("")
 
+  const handleSubmit = () => setPass(password)
+
+  const handlePasswordChange = (e: React.ChangeEvent<any>) => setPassword(e.target.value)
+
   return (
     <div>
       <h3>{text}</h3>
-      <input onChange={(e) => setPassword(e.target.value)} type="password" />
-      <button onClick={() => setPass(password)}>Submit</button>
+      <Input onChange={handlePasswordChange} type="password" />
+      <Btn value="Submit" onClick={handleSubmit} />
     </div>
   )
 }

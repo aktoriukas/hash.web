@@ -2,6 +2,8 @@ import { motion } from "framer-motion"
 import React, { useRef, useState } from "react"
 import { h_v } from "../func/variants"
 import { secret_type } from "../types"
+import Btn from "./Btn"
+import Input from "./Input"
 
 export default function NewSecret({ secrets, newSecret, setSecrets, setNewSecret }) {
   const [secretLabel, setSecretLabel] = useState(null)
@@ -13,10 +15,6 @@ export default function NewSecret({ secrets, newSecret, setSecrets, setNewSecret
   const hasWhiteSpace = (s: string) => /\s/g.test(s)
 
   const handleClick = () => {
-    // console.log("handleClick")
-    // console.log(secretLabel, secretValue)
-    // console.log(secrets)
-
     // validations
     if (secrets[secretLabel]) {
       labelErr.current.style.display = "block"
@@ -52,14 +50,21 @@ export default function NewSecret({ secrets, newSecret, setSecrets, setNewSecret
 
     // save the secret
     setSecrets((secrets: secret_type) => ({ ...secrets, [secretLabel]: secretValue }))
+
+    // reset the form
+    setSecretLabel(null)
+    setSecretValue(null)
   }
+
+  const handleLabelChange = (e: React.ChangeEvent<any>) => setSecretLabel(e.target.value)
+  const handleValueChange = (e: React.ChangeEvent<any>) => setSecretValue(e.target.value)
 
   return (
     <div>
       <motion.div variants={h_v} animate={newSecret ? "visible" : "hidden"}>
         <fieldset>
           <label>Label:</label>
-          <input onChange={(e) => setSecretLabel(e.target.value)} type="text" />
+          <Input value={secretLabel} onChange={handleLabelChange} type="text" />
           <span ref={labelErr} style={{ display: "none" }}>
             err
           </span>
@@ -67,13 +72,13 @@ export default function NewSecret({ secrets, newSecret, setSecrets, setNewSecret
 
         <fieldset>
           <label>Secret:</label>
-          <input onChange={(e) => setSecretValue(e.target.value)} type="text" />
+          <Input value={secretValue} onChange={handleValueChange} type="text" />
           <span ref={valueErr} style={{ display: "none" }}>
             err
           </span>
         </fieldset>
 
-        <button onClick={handleClick}>save</button>
+        <Btn value="save" onClick={handleClick} />
       </motion.div>
     </div>
   )

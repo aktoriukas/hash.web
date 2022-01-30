@@ -1,19 +1,22 @@
 import React, { useState } from "react"
+import Btn from "./Btn"
 import NewSecret from "./NewSecret"
 import Secret from "./Secret"
 
 export default function SecretContainer({ secrets, setSecrets }) {
   const [newSecret, setNewSecret] = useState(false)
 
-  return (
-    <div>
-      {Object.keys(secrets).map((key) => (
-        <Secret setSecrets={setSecrets} key={key} secret_name={key} secret_value={secrets[key]} />
-      ))}
+  const handleSecretClick = () => setNewSecret((prev) => !prev)
 
-      <button onClick={() => setNewSecret((v) => !v)}>
-        {newSecret ? "close" : "add new secret"}
-      </button>
+  return (
+    <>
+      <div className="grid gap-2">
+        {Object.keys(secrets).map((key) => (
+          <Secret setSecrets={setSecrets} key={key} secret_name={key} secret_value={secrets[key]} />
+        ))}
+      </div>
+
+      <Btn value={newSecret ? "close" : "add new secret"} onClick={handleSecretClick} />
 
       <NewSecret
         newSecret={newSecret}
@@ -21,6 +24,6 @@ export default function SecretContainer({ secrets, setSecrets }) {
         secrets={secrets}
         setSecrets={setSecrets}
       />
-    </div>
+    </>
   )
 }

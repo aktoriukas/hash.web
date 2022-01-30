@@ -30,7 +30,7 @@ const IndexPage = () => {
   }, [secrets])
 
   return (
-    <main>
+    <main className="mt-8">
       <title>Home Page</title>
       <h1>Hello World</h1>
 
