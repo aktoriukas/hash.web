@@ -7,6 +7,7 @@ import Input from "./Input"
 
 export default function Secret({ secret_name, secret_value, setSecrets }) {
   const [edit, setEdit] = useState(false)
+  const [show, setShow] = useState(false)
 
   const onValueChange = (e: React.ChangeEvent<any>) => {
     setSecrets((prevSecrets) => ({
@@ -24,24 +25,38 @@ export default function Secret({ secret_name, secret_value, setSecrets }) {
     })
   }
 
+  const copyToClipboard = () => {
+    const el = document.createElement("textarea")
+    el.value = secret_value
+    document.body.appendChild(el)
+    el.select()
+    document.execCommand("copy")
+    document.body.removeChild(el)
+  }
+
   const handleEditClick = () => setEdit((prev) => !prev)
+  const handleShowClick = () => setShow((prev) => !prev)
 
   return (
-    <div className="grid grid-cols-3 gap-4">
-      <div>
-        <div className="input-primary">{secret_name}</div>
+    <div className="grid border-b border-black-100 pb-4 mb-4 grid-cols-4 lg:grid-cols-7 gap-4">
+      <div className="col-span-2">
+        <div className="text-box-primary text-right lg:text-left">{secret_name}</div>
       </div>
-      <div>
+      <div className="col-span-2">
         <motion.div variants={h_v} animate={edit ? "hidden" : "visible"}>
-          <div className="input-primary">{secret_value}</div>
+          <div className="text-box-primary">
+            {show ? secret_value : [...secret_value].map(() => "*")}
+          </div>
         </motion.div>
         <motion.div variants={h_v} animate={edit ? "visible" : "hidden"}>
-          <Input className="input-primary active" onChange={onValueChange} value={secret_value} />
+          <Input type="text" className="active" onChange={onValueChange} value={secret_value} />
         </motion.div>
       </div>
-      <div className="func-btns-container">
-        <Btn value="edit" onClick={handleEditClick} />
+      <div className="func-btns-container grid grid-cols-4 gap-4 col-span-4 lg:col-span-3">
+        <Btn value={show ? "hide" : "show"} onClick={handleShowClick} />
+        <Btn value={edit ? "save" : "edit"} onClick={handleEditClick} />
         <Btn value="delete" onClick={onDelete} />
+        <Btn value="copy" onClick={copyToClipboard} />
       </div>
     </div>
   )

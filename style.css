@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #212529;
+  }
+  html {
+    @apply bg-black-900 text-black-100;
+  }
+  * {
+    @apply text-black-100;
+  }
+  .input-primary {
+    @apply border border-violet-100 
+        focus:border-gold-700 focus:outline-none focus:bg-violet-700
+        bg-violet-300 text-gold-700
+        p-2 rounded-md w-full;
+  }
+  .text-box-primary {
+    @apply border border-black-500 
+        focus:border-gold-700 focus:outline-none focus:bg-violet-700
+         text-gold-700
+        p-2 rounded-md w-full;
+  }
+}

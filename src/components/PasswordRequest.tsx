@@ -3,7 +3,7 @@ import Input from "./Input"
 import Btn from "./Btn"
 
 export default function PasswordRequest({ text, setPass }) {
-  const [password, setPassword] = useState("")
+  const [password, setPassword] = useState(null)
 
   const handleSubmit = () => setPass(password)
 
@@ -12,8 +12,11 @@ export default function PasswordRequest({ text, setPass }) {
   return (
     <div>
       <h3>{text}</h3>
-      <Input onChange={handlePasswordChange} type="password" />
-      <Btn value="Submit" onClick={handleSubmit} />
+      <input id="password" type="password" className="hidden" name="fakepasswordremembered"></input>
+      <div className="grid grid-cols-2">
+        <Input value={password} onChange={handlePasswordChange} type="password" />
+        <Btn value="Submit" onClick={handleSubmit} />
+      </div>
     </div>
   )
 }

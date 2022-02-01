@@ -7,7 +7,11 @@ export default function StringArea({ handleStringSubmit, string, setString }) {
   return (
     <div className="container">
       <h2>Enter your string:</h2>
-      <textarea value={string ? string : ""} onChange={(e) => setString(e.target.value)}></textarea>
+      <textarea
+        className="border-2 p-2 input-primary mb-4"
+        value={string ? string : ""}
+        onChange={(e) => setString(e.target.value)}
+      />
       <Btn value="Submit" onClick={hangleClick} />
     </div>
   )

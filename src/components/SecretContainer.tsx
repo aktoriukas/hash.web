@@ -10,7 +10,7 @@ export default function SecretContainer({ secrets, setSecrets }) {
 
   return (
     <>
-      <div className="grid gap-2">
+      <div className="grid md:gap-2 mt-10">
         {Object.keys(secrets).map((key) => (
           <Secret setSecrets={setSecrets} key={key} secret_name={key} secret_value={secrets[key]} />
         ))}
