@@ -6,6 +6,7 @@ import SecretContainer from "../components/SecretContainer"
 import { h_v } from "../func/variants"
 import { secret_type } from "../types"
 import { encryptData } from "../func/tools"
+import Background from "../components/Background"
 
 const IndexPage = () => {
   const [password, setPassword] = useState(null as string | null)
@@ -29,21 +30,38 @@ const IndexPage = () => {
     }
   }, [secrets])
 
+  const handleScrolling = (e) => {
+    let element = e.target as HTMLElement
+    let scrollTop = element.scrollTop
+    const paths = document.querySelectorAll(".mountain")
+    paths.forEach((path, index) => {
+      path.setAttribute("transform", `translate(0, ${(scrollTop * -0.15) / index})`)
+    })
+  }
+
   return (
-    <main className="mt-8 max-w-4xl mx-auto px-4">
-      <title>Home Page</title>
-      <h1>Hello World</h1>
+    <div className="h-screen overflow-y-auto" onScroll={handleScrolling}>
+      <main className="mt-8 max-w-4xl mx-auto px-4">
+        <title>Home Page</title>
+        <h1>Hello World</h1>
 
-      <motion.div variants={h_v} animate={password ? "visible" : "hidden"}>
-        <StringArea setString={setString} string={string} handleStringSubmit={handleStringSubmit} />
-      </motion.div>
+        <motion.div variants={h_v} animate={password ? "visible" : "hidden"}>
+          <StringArea
+            setString={setString}
+            string={string}
+            handleStringSubmit={handleStringSubmit}
+          />
+        </motion.div>
 
-      <motion.div variants={h_v} animate={password ? "hidden" : "visible"}>
-        <PasswordRequest setPass={setPassword} text={"Your Password:"} />
-      </motion.div>
+        <motion.div variants={h_v} animate={password ? "hidden" : "visible"}>
+          <PasswordRequest setPass={setPassword} text={"Your Password:"} />
+        </motion.div>
 
-      <SecretContainer setSecrets={setSecrets} secrets={secrets} />
-    </main>
+        <SecretContainer setSecrets={setSecrets} secrets={secrets} />
+
+        <Background />
+      </main>
+    </div>
   )
 }
 

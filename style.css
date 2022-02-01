@@ -15,6 +15,9 @@
   * {
     @apply text-black-100;
   }
+  .mountain {
+    @apply transition duration-200 ease-in-out;
+  }
   .input-primary {
     @apply border border-violet-100 
         focus:border-gold-700 focus:outline-none focus:bg-violet-700
