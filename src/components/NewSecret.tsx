@@ -79,7 +79,7 @@ export default function NewSecret({ secrets, newSecret, setSecrets, setNewSecret
             </span>
           </fieldset>
 
-          <Btn wrapperClassName="row-start-2" value="save" onClick={handleClick} />
+          <Btn wrapperClassName="md:row-start-2" value="save" onClick={handleClick} />
         </div>
       </motion.div>
     </div>
