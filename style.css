@@ -1,19 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Patrick+Hand+SC&display=swap");
 
 @layer base {
-  body {
-    font-family: "Nunito", sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #212529;
-  }
   html {
     @apply bg-black-900 text-black-100;
   }
   * {
     @apply text-black-100;
+    font-family: "Montserrat", sans-serif;
+  }
+  .text-hand {
+    font-family: "Patrick Hand SC", cursive;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    line-height: 1rem;
   }
   .mountain {
     @apply transition duration-200 ease-in-out;
@@ -21,7 +23,9 @@
   .input-primary {
     @apply border border-violet-100 
         focus:border-gold-700 focus:outline-none focus:bg-violet-700
-        bg-violet-300 text-gold-700
+        hover:border-gold-700 hover:bg-violet-700
+        bg-violet-500 text-gold-700
+        transition duration-200 ease-in-out
         p-2 rounded-md w-full;
   }
   .text-box-primary {
@@ -29,5 +33,110 @@
         focus:border-gold-700 focus:outline-none focus:bg-violet-700
          text-gold-700
         p-2 rounded-md w-full;
+  }
+  .input-no-edit {
+    @apply bg-violet-700 border-black-500
+    hover:bg-violet-700 hover:border-black-500;
+  }
+  .triangle-down:before,
+  .triangle-down:after {
+    content: "";
+    position: absolute;
+    width: 15%;
+    height: 4px;
+    border-radius: 10px;
+    bottom: -15px;
+    background-color: #c6994c;
+    transition: all 6s ease-in-out;
+  }
+  .triangle-down:before {
+    right: 50%;
+    margin-left: -5px;
+    animation: rotate-right 6s linear infinite;
+  }
+  .triangle-down:after {
+    left: 50%;
+    margin-left: -5px;
+    animation: rotate-left 6s linear infinite;
+  }
+  @keyframes rotate-right {
+    0% {
+      transform: rotate(0deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+    30% {
+      transform: rotate(0deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+
+    45% {
+      transform: rotate(25deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+
+    50% {
+      transform: rotate(25deg);
+      box-shadow: 3px 6px 0px 0px #b16058;
+    }
+    55% {
+      transform: rotate(25deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+    60% {
+      transform: rotate(0deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+    100% {
+      transform: rotate(0deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+  }
+  @keyframes rotate-left {
+    0% {
+      transform: rotate(0deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+    30% {
+      transform: rotate(0deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+
+    45% {
+      transform: rotate(-25deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+    50% {
+      transform: rotate(-25deg);
+      box-shadow: -3px 6px 0px 0px #b16058;
+    }
+    55% {
+      transform: rotate(-25deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+    60% {
+      transform: rotate(0deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+
+    100% {
+      transform: rotate(0deg);
+      box-shadow: 0px 0px 0px 0px rgba(177, 96, 88, 0);
+    }
+  }
+  .content:before {
+    @apply bg-black-500;
+    filter: blur(1px);
+    content: "";
+    position: absolute;
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .box-container {
+    @apply content transition duration-200 ease-in-out border border-black-500 rounded-sm px-4 py-10 md:p-14 relative;
   }
 }

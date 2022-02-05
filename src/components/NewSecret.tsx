@@ -60,25 +60,27 @@ export default function NewSecret({ secrets, newSecret, setSecrets, setNewSecret
   const handleValueChange = (e: React.ChangeEvent<any>) => setSecretValue(e.target.value)
 
   return (
-    <div>
+    <div className="mt-5">
       <motion.div variants={h_v} animate={newSecret ? "visible" : "hidden"}>
-        <fieldset>
-          <label>Label:</label>
-          <Input value={secretLabel} onChange={handleLabelChange} type="text" />
-          <span ref={labelErr} style={{ display: "none" }}>
-            err
-          </span>
-        </fieldset>
+        <div className="grid gap-5 md:grid-cols-3 items-start">
+          <fieldset>
+            <label>Label:</label>
+            <Input value={secretLabel} onChange={handleLabelChange} type="text" />
+            <span ref={labelErr} style={{ display: "none" }}>
+              err
+            </span>
+          </fieldset>
 
-        <fieldset>
-          <label>Secret:</label>
-          <Input value={secretValue} onChange={handleValueChange} type="text" />
-          <span ref={valueErr} style={{ display: "none" }}>
-            err
-          </span>
-        </fieldset>
+          <fieldset>
+            <label>Secret:</label>
+            <Input value={secretValue} onChange={handleValueChange} type="text" />
+            <span ref={valueErr} style={{ display: "none" }}>
+              err
+            </span>
+          </fieldset>
 
-        <Btn value="save" onClick={handleClick} />
+          <Btn wrapperClassName="row-start-2" value="save" onClick={handleClick} />
+        </div>
       </motion.div>
     </div>
   )

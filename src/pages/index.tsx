@@ -5,26 +5,29 @@ import { motion } from "framer-motion"
 import SecretContainer from "../components/SecretContainer"
 import { h_v } from "../func/variants"
 import { secret_type } from "../types"
-import { encryptData } from "../func/tools"
+import { decryptData, encryptData } from "../func/tools"
 import Background from "../components/Background"
+import About from "../components/About"
 
 const IndexPage = () => {
   const [password, setPassword] = useState(null as string | null)
   const [string, setString] = useState(null as string | null)
-  const [secrets, setSecrets] = useState({
-    one: "This is a secret",
-    two: "This is another secret",
-    "3": "This is the last secret",
-    "4": "This is the last secret",
-  } as secret_type)
+  const [secrets, setSecrets] = useState({} as secret_type)
+  const [visibleContent, setVisibleContent] = useState(false)
 
   const handleStringSubmit = (string: string) => {
     setString(string)
+    if (password) {
+      const newSecrets = decryptData(string, password)
+      if (newSecrets) {
+        setSecrets(newSecrets)
+        return true
+      } else return false
+    } else return false
   }
 
   useEffect(() => {
     if (password) {
-      // convert secrets to string
       const string = encryptData(password, secrets)
       setString(string)
     }
@@ -35,30 +38,39 @@ const IndexPage = () => {
     let scrollTop = element.scrollTop
     const paths = document.querySelectorAll(".mountain")
     paths.forEach((path, index) => {
-      path.setAttribute("transform", `translate(0, ${(scrollTop * -0.15) / index})`)
+      path.setAttribute("transform", `translate(0, ${(scrollTop * -0.02) / index})`)
     })
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      setVisibleContent(true)
+    }, 250)
+  }, [])
+
   return (
     <div className="h-screen overflow-y-auto" onScroll={handleScrolling}>
-      <main className="mt-8 max-w-4xl mx-auto px-4">
+      <main className="mt-8 max-w-4xl mx-auto px-4 flex flex-col justify-between">
         <title>Home Page</title>
-        <h1>Hello World</h1>
+        <div className=" min-h-screen">
+          <div className={`box-container ${visibleContent ? "opacity-100" : "opacity-0"}`}>
+            <motion.div variants={h_v} animate={password ? "visible" : "hidden"}>
+              <StringArea
+                secrets={secrets}
+                string={string}
+                handleStringSubmit={handleStringSubmit}
+              />
+            </motion.div>
 
-        <motion.div variants={h_v} animate={password ? "visible" : "hidden"}>
-          <StringArea
-            setString={setString}
-            string={string}
-            handleStringSubmit={handleStringSubmit}
-          />
-        </motion.div>
+            <motion.div variants={h_v} animate={password ? "hidden" : "visible"}>
+              <PasswordRequest setPass={setPassword} text={"Your Password:"} />
+            </motion.div>
 
-        <motion.div variants={h_v} animate={password ? "hidden" : "visible"}>
-          <PasswordRequest setPass={setPassword} text={"Your Password:"} />
-        </motion.div>
+            <SecretContainer password={password} setSecrets={setSecrets} secrets={secrets} />
+          </div>
+        </div>
 
-        <SecretContainer setSecrets={setSecrets} secrets={secrets} />
-
+        <About />
         <Background />
       </main>
     </div>

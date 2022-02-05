@@ -38,20 +38,23 @@ export default function Secret({ secret_name, secret_value, setSecrets }) {
   const handleShowClick = () => setShow((prev) => !prev)
 
   return (
-    <div className="grid border-b border-black-100 pb-4 mb-4 grid-cols-4 lg:grid-cols-7 gap-4">
+    <div className="grid border-b border-black-100 last:border-b-0 pb-4 mb-4 grid-cols-4 lg:grid-cols-7 gap-4">
       <div className="col-span-2">
         <div className="text-box-primary text-right lg:text-left">{secret_name}</div>
       </div>
+
       <div className="col-span-2">
         <motion.div variants={h_v} animate={edit ? "hidden" : "visible"}>
           <div className="text-box-primary">
             {show ? secret_value : [...secret_value].map(() => "*")}
           </div>
         </motion.div>
+
         <motion.div variants={h_v} animate={edit ? "visible" : "hidden"}>
           <Input type="text" className="active" onChange={onValueChange} value={secret_value} />
         </motion.div>
       </div>
+
       <div className="func-btns-container grid grid-cols-4 gap-4 col-span-4 lg:col-span-3">
         <Btn value={show ? "hide" : "show"} onClick={handleShowClick} />
         <Btn value={edit ? "save" : "edit"} onClick={handleEditClick} />

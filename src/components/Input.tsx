@@ -10,6 +10,7 @@ interface InputProps {
   className?: string
   show?: boolean
   kind?: "primary" | "secondary" | "tertiary" | "danger"
+  wrapperClassName?: string
 }
 
 export default function Input({
@@ -19,14 +20,17 @@ export default function Input({
   show = true,
   value,
   className,
+  wrapperClassName = "",
+  placeholder = "",
 }: InputProps) {
   if (kind === "primary") {
     return (
-      <motion.div variants={h_v} animate={show ? "visible" : "hidden"}>
+      <motion.div className={wrapperClassName} variants={h_v} animate={show ? "visible" : "hidden"}>
         <input
           className={`input-primary ${className ? className : ""}`}
           value={value ? value : ""}
           autoComplete="off"
+          placeholder={placeholder}
           onChange={onChange}
           type={type}
         />
