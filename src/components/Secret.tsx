@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import React from "react"
 import { useState } from "react"
-import { h_v } from "../func/variants"
+import { h_v, h_v_fast } from "../func/variants"
 import Btn from "./Btn"
 import Input from "./Input"
 
@@ -56,21 +56,21 @@ export default function Secret({ secret_name, secret_value, setSecrets }) {
       <div className="func-btns-container grid grid-cols-4 gap-4 col-span-4 lg:col-span-3">
         <Btn value={show ? "hide" : "show"} onClick={handleShowClick} />
         <Btn value={edit ? "save" : "edit"} onClick={handleEditClick} />
-        <motion.div variants={h_v} animate={deleteMsg ? "hidden" : "visible"}>
+        <motion.div variants={h_v_fast} animate={deleteMsg ? "hidden" : "visible"}>
           <Btn value="delete" onClick={() => setDeleteMsg(true)} />
         </motion.div>
         <motion.div
           className="col-span-2"
-          variants={h_v}
+          variants={h_v_fast}
           animate={deleteMsg ? "visible" : "hidden"}
         >
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 relative">
             <Btn value="yes" onClick={onDelete} />
             <Btn value="no" onClick={() => setDeleteMsg(false)} />
-            <p className="col-span-2 text-center text-hand text-gold-500">are you sure?</p>
+            <p className="absolute text-center text-hand text-gold-500 -bottom-5">are you sure?</p>
           </div>
         </motion.div>
-        <motion.div variants={h_v} animate={deleteMsg ? "hidden" : "visible"}>
+        <motion.div variants={h_v_fast} animate={deleteMsg ? "hidden" : "visible"}>
           <Btn value="copy" onClick={copyToClipboard} />
         </motion.div>
       </div>
