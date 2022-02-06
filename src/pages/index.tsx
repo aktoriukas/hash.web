@@ -51,7 +51,6 @@ const IndexPage = () => {
   return (
     <div className="h-screen overflow-y-auto" onScroll={handleScrolling}>
       <main className="mt-8 max-w-4xl mx-auto px-4 flex flex-col justify-between">
-        <title>Home Page</title>
         <div className=" min-h-screen">
           <div className={`box-container ${visibleContent ? "opacity-100" : "opacity-0"}`}>
             <motion.div variants={h_v} animate={password ? "visible" : "hidden"}>

@@ -3,5 +3,5 @@ module.exports = {
     title: `hash.web`,
     siteUrl: `https://www.yourdomain.tld`,
   },
-  plugins: [`gatsby-plugin-postcss`],
+  plugins: [`gatsby-plugin-postcss`, `gatsby-plugin-react-helmet`],
 }
