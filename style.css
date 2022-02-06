@@ -139,4 +139,16 @@
   .box-container {
     @apply content transition duration-200 ease-in-out border border-black-500 rounded-sm px-4 py-10 md:p-14 relative;
   }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 }

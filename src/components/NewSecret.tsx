@@ -8,6 +8,7 @@ import Input from "./Input"
 export default function NewSecret({ secrets, newSecret, setSecrets, setNewSecret }) {
   const [secretLabel, setSecretLabel] = useState(null)
   const [secretValue, setSecretValue] = useState(null)
+  const [generateLength, setGenerateLength] = useState(16 as number)
 
   const labelErr = useRef(null)
   const valueErr = useRef(null)
@@ -59,11 +60,22 @@ export default function NewSecret({ secrets, newSecret, setSecrets, setNewSecret
   const handleLabelChange = (e: React.ChangeEvent<any>) => setSecretLabel(e.target.value)
   const handleValueChange = (e: React.ChangeEvent<any>) => setSecretValue(e.target.value)
 
+  const randomGeneratePassword = () => {
+    const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_"
+    const password = Array(+generateLength)
+      .fill(0)
+      .map(() => chars[Math.floor(Math.random() * chars.length)])
+      .join("")
+    setSecretValue(password)
+  }
+
+  const handleGenerateChange = (e: React.ChangeEvent<any>) => setGenerateLength(+e.target.value)
+
   return (
     <div className="mt-5">
       <motion.div variants={h_v} animate={newSecret ? "visible" : "hidden"}>
-        <div className="grid gap-5 md:grid-cols-3 items-start">
-          <fieldset>
+        <div className="grid gap-5 grid-cols-2 md:grid-cols-3 items-start">
+          <fieldset className="col-span-2 md:col-span-1">
             <label>Label:</label>
             <Input value={secretLabel} onChange={handleLabelChange} type="text" />
             <span ref={labelErr} style={{ display: "none" }}>
@@ -71,7 +83,7 @@ export default function NewSecret({ secrets, newSecret, setSecrets, setNewSecret
             </span>
           </fieldset>
 
-          <fieldset>
+          <fieldset className="col-span-2 md:col-span-1">
             <label>Secret:</label>
             <Input value={secretValue} onChange={handleValueChange} type="text" />
             <span ref={valueErr} style={{ display: "none" }}>
@@ -80,6 +92,10 @@ export default function NewSecret({ secrets, newSecret, setSecrets, setNewSecret
           </fieldset>
 
           <Btn wrapperClassName="md:row-start-2" value="save" onClick={handleClick} />
+          <div className="md:row-start-2 grid grid-cols-3 gap-2">
+            <Btn wrapperClassName="col-span-2" value="generate" onClick={randomGeneratePassword} />
+            <Input value={`${generateLength}`} onChange={handleGenerateChange} type="number" />
+          </div>
         </div>
       </motion.div>
     </div>

@@ -8,6 +8,7 @@ import Input from "./Input"
 export default function Secret({ secret_name, secret_value, setSecrets }) {
   const [edit, setEdit] = useState(false)
   const [show, setShow] = useState(false)
+  const [deleteMsg, setDeleteMsg] = useState(false)
 
   const onValueChange = (e: React.ChangeEvent<any>) => {
     setSecrets((prevSecrets) => ({
@@ -16,9 +17,6 @@ export default function Secret({ secret_name, secret_value, setSecrets }) {
     }))
   }
   const onDelete = () => {
-    // display a confirmation dialog
-
-    // if confirmed, delete the secret
     setSecrets((prevSecrets) => {
       const { [secret_name]: value, ...rest } = prevSecrets
       return rest
@@ -58,8 +56,23 @@ export default function Secret({ secret_name, secret_value, setSecrets }) {
       <div className="func-btns-container grid grid-cols-4 gap-4 col-span-4 lg:col-span-3">
         <Btn value={show ? "hide" : "show"} onClick={handleShowClick} />
         <Btn value={edit ? "save" : "edit"} onClick={handleEditClick} />
-        <Btn value="delete" onClick={onDelete} />
-        <Btn value="copy" onClick={copyToClipboard} />
+        <motion.div variants={h_v} animate={deleteMsg ? "hidden" : "visible"}>
+          <Btn value="delete" onClick={() => setDeleteMsg(true)} />
+        </motion.div>
+        <motion.div
+          className="col-span-2"
+          variants={h_v}
+          animate={deleteMsg ? "visible" : "hidden"}
+        >
+          <div className="grid grid-cols-2 gap-2">
+            <Btn value="yes" onClick={onDelete} />
+            <Btn value="no" onClick={() => setDeleteMsg(false)} />
+            <p className="col-span-2 text-center text-hand text-gold-500">are you sure?</p>
+          </div>
+        </motion.div>
+        <motion.div variants={h_v} animate={deleteMsg ? "hidden" : "visible"}>
+          <Btn value="copy" onClick={copyToClipboard} />
+        </motion.div>
       </div>
     </div>
   )
