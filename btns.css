@@ -1,0 +1,159 @@
+.nav-btn-primary,
+.nav-btn-primary:after,
+.nav-btn-primary:before {
+  width: 130px;
+  height: 45px;
+  line-height: 45px;
+  font-size: 20px;
+  font-family: "Bebas Neue", sans-serif;
+  background: linear-gradient(45deg, transparent 5%, #eca72c 5%);
+  border: 0;
+  color: #221e22;
+  letter-spacing: 3px;
+  box-shadow: 6px 0px 0px #eca72c;
+  outline: transparent;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.nav-btn-primary.active {
+  box-shadow: 6px 0px 0px #964d5e;
+}
+.nav-btn-primary:after,
+.nav-btn-primary:before {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+
+  content: "STAY SECURE";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #964d5e 3%, #964d5e 5%, #44355b 5%);
+  text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px #964d5e;
+  clip-path: var(--slice-0);
+}
+.nav-btn-primary:before {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+.nav-btn-primary {
+  animation: 1s glitch-opacity;
+  animation-timing-function: steps(2, end);
+}
+.nav-btn-primary:active {
+  top: 2px;
+}
+
+.nav-btn-primary:hover:after,
+.nav-btn-primary:focus:after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
+}
+@keyframes glitch-opacity {
+  0% {
+    clip-path: var(--slice-1);
+    opacity: 0.5;
+    color: transparent;
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+
+    transform: translate(5px, 10px);
+  }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    color: transparent;
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    opacity: 1;
+
+    transform: translate(0);
+  }
+}

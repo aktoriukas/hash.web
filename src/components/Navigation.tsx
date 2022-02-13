@@ -8,20 +8,22 @@ interface Props {
 
 export default function Navigation({ setPage, page }: Props) {
   return (
-    <nav className="mb-8 mt-1">
+    <nav className="mb-4 mt-4">
       <ul className="flex flex-row justify-center gap-8">
         <li>
           <button
-            className={`${page === "home" ? "active" : "bg-violet-700"} nav-btn`}
             onClick={() => setPage("home")}
+            className={`nav-btn-primary ${page === "home" && "active"}`}
+            role="button"
           >
             Home
           </button>
         </li>
         <li>
           <button
-            className={`${page === "about" ? "active" : "bg-violet-700"} nav-btn`}
             onClick={() => setPage("about")}
+            className={`nav-btn-primary ${page === "about" && "active"}`}
+            role="button"
           >
             About
           </button>

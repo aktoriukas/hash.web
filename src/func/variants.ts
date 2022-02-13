@@ -40,3 +40,32 @@ export const h_v_fast = {
     display: "block",
   },
 }
+
+const duration_pages = 0.15
+
+export const h_v_pages = {
+  hidden: {
+    opacity: 0,
+    display: "none",
+    transition: {
+      opacity: {
+        ease: "easeInOut",
+      },
+      display: {
+        delay: duration_pages,
+        ease: "easeInOut",
+      },
+    },
+  },
+
+  visible: {
+    opacity: 1,
+    display: "block",
+    transition: {
+      opacity: {
+        delay: duration_pages,
+        ease: "easeInOut",
+      },
+    },
+  },
+}

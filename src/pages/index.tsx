@@ -3,7 +3,7 @@ import PasswordRequest from "../components/PasswordRequest"
 import StringArea from "../components/StringArea"
 import { motion } from "framer-motion"
 import SecretContainer from "../components/SecretContainer"
-import { h_v } from "../func/variants"
+import { h_v, h_v_pages } from "../func/variants"
 import { page_type, secret_type } from "../types"
 import { decryptData, encryptData } from "../func/tools"
 import Background from "../components/Background"
@@ -56,7 +56,7 @@ const IndexPage = () => {
       <main className="max-w-4xl mx-auto px-4 flex flex-col justify-between">
         <Navigation setPage={setPage} page={page} />
 
-        <motion.div variants={h_v} animate={page === "home" ? "visible" : "hidden"}>
+        <motion.div variants={h_v_pages} animate={page === "home" ? "visible" : "hidden"}>
           <div className=" min-h-screen">
             <div className={`box-container ${visibleContent ? "opacity-100" : "opacity-0"}`}>
               <motion.div variants={h_v} animate={password ? "visible" : "hidden"}>
@@ -76,7 +76,7 @@ const IndexPage = () => {
           </div>
         </motion.div>
 
-        <motion.div variants={h_v} animate={page === "about" ? "visible" : "hidden"}>
+        <motion.div variants={h_v_pages} animate={page === "about" ? "visible" : "hidden"}>
           <AboutPage />
         </motion.div>
 
