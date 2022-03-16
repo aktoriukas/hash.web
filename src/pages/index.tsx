@@ -15,7 +15,7 @@ const IndexPage = () => {
   const [password, setPassword] = useState(null as string | null)
   const [string, setString] = useState(null as string | null)
   const [secrets, setSecrets] = useState({} as secret_type)
-  const [visibleContent, setVisibleContent] = useState(false)
+  const [visibleContent, setVisibleContent] = useState(false as boolean)
   const [page, setPage] = useState("home" as page_type)
 
   const handleStringSubmit = (string: string) => {
@@ -36,14 +36,14 @@ const IndexPage = () => {
     }
   }, [secrets])
 
-  const handleScrolling = (e) => {
-    let element = e.target as HTMLElement
-    let scrollTop = element.scrollTop
-    const paths = document.querySelectorAll(".mountain")
-    paths.forEach((path, index) => {
-      path.setAttribute("transform", `translate(0, ${(scrollTop * -0.02) / index})`)
-    })
-  }
+  // const handleScrolling = (e) => {
+  //   let element = e.target as HTMLElement
+  //   let scrollTop = element.scrollTop
+  //   const paths = document.querySelectorAll(".mountain")
+  //   paths.forEach((path, index) => {
+  //     path.setAttribute("transform", `translate(0, ${(scrollTop * -0.02) / index})`)
+  //   })
+  // }
 
   useEffect(() => {
     setTimeout(() => {
@@ -52,7 +52,8 @@ const IndexPage = () => {
   }, [])
 
   return (
-    <div className="h-screen overflow-y-auto" onScroll={handleScrolling}>
+    <div className="h-screen overflow-y-auto">
+      {/* onScroll={handleScrolling} */}
       <main className="max-w-4xl mx-auto px-4 flex flex-col justify-between">
         <Navigation setPage={setPage} page={page} />
 
@@ -60,11 +61,7 @@ const IndexPage = () => {
           <div className=" min-h-screen">
             <div className={`box-container ${visibleContent ? "opacity-100" : "opacity-0"}`}>
               <motion.div variants={h_v} animate={password ? "visible" : "hidden"}>
-                <StringArea
-                  secrets={secrets}
-                  string={string}
-                  handleStringSubmit={handleStringSubmit}
-                />
+                <StringArea secrets={secrets} string={string} handleStringSubmit={handleStringSubmit} />
               </motion.div>
 
               <motion.div variants={h_v} animate={password ? "hidden" : "visible"}>
@@ -81,7 +78,7 @@ const IndexPage = () => {
         </motion.div>
 
         <About />
-        <Background />
+        {/* <Background /> */}
       </main>
     </div>
   )

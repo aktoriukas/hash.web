@@ -30,7 +30,7 @@
   }
   .text-box-primary {
     @apply border border-black-500 
-        focus:border-gold-700 focus:outline-none focus:bg-violet-700
+        focus:border-gold-700 focus:outline-none focus:bg-violet-700 overflow-hidden
          text-gold-700
         p-2 rounded-md w-full;
   }

@@ -43,9 +43,7 @@ export default function Secret({ secret_name, secret_value, setSecrets }) {
 
       <div className="col-span-2">
         <motion.div variants={h_v} animate={edit ? "hidden" : "visible"}>
-          <div className="text-box-primary">
-            {show ? secret_value : [...secret_value].map(() => "*")}
-          </div>
+          <div className="text-box-primary ">{show ? secret_value : [...secret_value].map(() => "*")}</div>
         </motion.div>
 
         <motion.div variants={h_v} animate={edit ? "visible" : "hidden"}>
@@ -59,11 +57,7 @@ export default function Secret({ secret_name, secret_value, setSecrets }) {
         <motion.div variants={h_v_fast} animate={deleteMsg ? "hidden" : "visible"}>
           <Btn value="delete" onClick={() => setDeleteMsg(true)} />
         </motion.div>
-        <motion.div
-          className="col-span-2"
-          variants={h_v_fast}
-          animate={deleteMsg ? "visible" : "hidden"}
-        >
+        <motion.div className="col-span-2" variants={h_v_fast} animate={deleteMsg ? "visible" : "hidden"}>
           <div className="grid grid-cols-2 gap-2 relative">
             <Btn value="yes" onClick={onDelete} />
             <Btn value="no" onClick={() => setDeleteMsg(false)} />

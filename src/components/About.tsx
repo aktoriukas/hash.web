@@ -11,7 +11,7 @@ const About = () => {
   ]
 
   return (
-    <div className="box-container mb-20 w-max mx-auto py-6">
+    <div className="box-container my-20 w-max mx-auto py-6">
       <ul className="grid grid-flow-col gap-5">
         {socialLinks.map((link, i) => (
           <li key={i} className="flex items-center">
